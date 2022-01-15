@@ -51,10 +51,17 @@ class SignViewController: UIViewController {
         Auth.auth().signIn(withEmail: userNameTextLabel.text!, password: passwordTextLabel.text!) { [weak self] authResult, error in
             if let error = error {
                 print(error)
+                let alertController = UIAlertController(title: "Hata", message: "Hatalı giriş yaptınız", preferredStyle: .alert)
+                let iptalAction = UIAlertAction(title: "Tamam", style: .destructive) { action in
+                    
+                }
+                alertController.addAction(iptalAction)
+                self?.present(alertController, animated: true)
                 return
+            } else {
+                self?.performSegue(withIdentifier: "toHome", sender: nil)
             }
         }
-        performSegue(withIdentifier: "toHome", sender: nil)
     }
     
 }
